@@ -13,14 +13,14 @@ O projeto requer o **Python 3*** e as seguintes bibliotecas instaladas:
 
 ### Código
 
-O código do classificador está disponível no arquivo `medical_appointment_classifier.py` e o código responsável para a geração do modelo está no arquivo `medical_appointment_builder.py`. Para geração do modelo será necessário a inclusão do arquivo `medical_appointment.csv` para treinamento e teste do modelo.
+O código do classificador está disponível no arquivo `ml/classifier.py` e o código responsável para a geração do modelo está no arquivo `ml/builder.py`. Para geração do modelo será necessário a inclusão do arquivo `data/medical_appointment.csv` para treinamento e teste do modelo.
 
 ### Execução
 
-Em um terminal, navegue até a raiz do diretório do projeto `medical-appointment-classifier/` e execute o comando:
+Em um terminal, navegue até a raiz do diretório do projeto `medical-appointment-classifier/ml` e execute o comando:
 
 ```bash
-python medical_appointment_builder.py
+python builder.py
 ```  
 
 A execução deste código irá realizar os seguintes passos:
@@ -58,3 +58,11 @@ O dataset consiste de aproximadamente 110.500 agendamentos de consulta médicas,
 
 **Classes (target variable)**
 - `No-show`: Paciente compareceu a consulta no dia agendado (1 ou 0)
+
+### API + Frontend da Aplicação
+
+Para viabilizar o teste do modelo gerado com maior facilidade foi implementada uma API REST. O microframework `Flask` foi utilizado para a criação do endpoint da aplicação. O código implementado pode ser visualizado no arquivo `app.py` na raiz do projeto. Já no frontend, o framework `Vue.js` foi utilizado para disponibilizar a inserção dos dados pelo usuário via interface. A API desenvolvida possui um método `predict` que recebe requisições POST com os parâmetros de entrada. Os parâmetros são transformados para o padrão de dados aceito pelo modelo e são inseridos como input no modelo de machine learning desenvolvido.
+
+### Deploy e Limitações
+
+O projeto foi implantando no ecossistema de nuvem `Heroku`. Os arquivos de configuração para deploy estão localizados na raiz do projeto. A principal limitação da versão implantada é o delay que pode ser ocasionado para obtenção de respostas do servidor. Isto deve-se ao fato da versão free ter a limitação na qual a aplicação "dorme" a cada 30 minutos de inatividade.
